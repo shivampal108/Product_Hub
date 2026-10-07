@@ -1,6 +1,8 @@
 package com.product.hub.service;
 
 
+//import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.data.domain.Page;
 
 import com.product.hub.dtos.request.ProductRequest;
@@ -13,6 +15,7 @@ public interface ProductService {
 	public ProductRespoonse addProduct(ProductRequest request);
 	
 	public ProductRespoonse updateProduct(ProductRequest request,Long id);
+//	@Cacheable(value = "products", key = "#id")
 	
 	public ProductRespoonse viewProduct(Long id);
 	

@@ -15,6 +15,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Configuration
 
 public class SecurityFilters {
@@ -37,8 +39,11 @@ public class SecurityFilters {
          .requestMatchers("/api-auth/login", "/api-auth/login/**")
          .permitAll().		requestMatchers("/api-user/register").permitAll()
          
-         .requestMatchers("/api-product/view-all","/api-product/view/**").hasAnyRole("ADMIN","USER")
-         .requestMatchers("/api-product/add","/api-product/delete/**","/api-product/update/**").hasRole("USER")
+         .requestMatchers("/api-product/view/**","/api-user/view/**","/api-user/me").hasAnyRole("ADMIN","USER")
+         .requestMatchers("/api-product/add","/api-product/delete/**","/api-product/update/**","/api-user/view-all"
+        		 ,"/api-user/delete/**"
+        		 ,"/api-user/update/**"
+        		 ).hasRole("ADMIN")
 
          .requestMatchers(
                  "/swagger-ui/**",
@@ -47,6 +52,8 @@ public class SecurityFilters {
                  "/api-auth/login",
                  "/api-auth/register"
              ).permitAll()
+         
+         .requestMatchers("/api-product/view-product-page/**").permitAll()
 		.anyRequest().authenticated()
 		
 				
@@ -58,7 +65,17 @@ public class SecurityFilters {
             session.sessionCreationPolicy(
                 SessionCreationPolicy.IF_REQUIRED
             )
-        );
+        )    .logout(logout -> logout
+                .logoutUrl("/api-auth/logout")
+
+                .logoutSuccessHandler((request, response, authentication) -> {
+                    response.setStatus(HttpServletResponse.SC_OK);
+                })
+
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+            );
 		
 		
 		

@@ -1,5 +1,7 @@
 package com.product.hub.dtos.response;
 
+import java.io.Serializable;
+
 import com.product.hub.enums.Roles;
 
 import lombok.AllArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDtoResponse {
+public class UserDtoResponse implements Serializable {
 	
 	private String userName;
 	private Roles role;

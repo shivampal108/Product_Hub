@@ -54,6 +54,12 @@ public class UserServiceImp implements UserService {
 		User user= userRepo.findByUserName(userName);
 		
 		
+		if(user ==null) {
+			
+			throw new UserNotFoundException("User not there with user name: "+userName);
+		}
+		
+		
 		UserDtoResponse response= new UserDtoResponse();
 		
 		BeanUtils.copyProperties(user, response);

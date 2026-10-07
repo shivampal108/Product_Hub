@@ -1,5 +1,8 @@
 package com.product.hub.dtos.response;
 
+import java.io.Serializable;
+
+
 import com.product.hub.enums.Category;
 
 import jakarta.persistence.EnumType;
@@ -13,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class ProductRespoonse {
+public class ProductRespoonse implements Serializable {
 	
 	private Long productId;
 	
