@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDtoResponse implements Serializable {
-	
+	  private Long userId;
 	private String userName;
 	private Roles role;
 	private String mobile;

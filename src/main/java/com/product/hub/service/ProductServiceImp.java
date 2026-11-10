@@ -2,6 +2,8 @@ package com.product.hub.service;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,8 +40,8 @@ public class ProductServiceImp implements ProductService {
 		
 		
 		
-		System.out.println(request.getPrice());
-		System.out.println(p.getPrice());
+//		System.out.println(request.getPrice());
+//		System.out.println(p.getPrice());
 
 		
 		pRepo.save(p);
@@ -93,7 +95,19 @@ ProductRespoonse response= ProductRespoonse.builder().build();
 
 
 
-	
+	  // Helper: create a sample entity
+    private Product createProduct() {
+        Product p = new Product();
+        p.setProductId(1L);
+        p.setProductName("Laptop");
+        p.setProductDesc("Gaming laptop");
+        p.setImage("laptop.png");
+        p.setPrice(1000.0);
+        p.setDiscount(10.0);
+        p.setNetPrice(900.0);
+        p.setQuantity(5);
+        return p;
+    }
 	@Override
 	public Page<Product> pageWise(int pageSize, int pageNo) {
 		
